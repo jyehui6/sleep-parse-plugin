@@ -21,7 +21,7 @@ Sleep Analysis Plugin 是一个专门用于解析能斯达智能睡眠监测产�
 ```xml
 <dependency>
     <groupId>io.github.jyehui6</groupId>
-    <artifactId>sleep-analysis-plugin</artifactId>
+    <artifactId>sleepparse</artifactId>
     <version>1.0.0.RELEASE</version>
 </dependency>
 ```

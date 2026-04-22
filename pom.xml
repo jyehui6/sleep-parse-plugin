@@ -8,8 +8,8 @@
     <artifactId>sleepparse</artifactId>
     <version>1.0.0.RELEASE</version>
     <name>sleepparse</name>
-    <description>The Sleep Analysis Plugin is a tool library specifically designed for parsing the sleep data of Nengsida intelligent sleep monitoring product devices </description>
-    <url>https://github.com/jyehui6/SleepDataParser</url>
+    <description>The Sleep Analysis Plugin is a tool library specifically designed for parsing the sleep data of Leanstar intelligent sleep monitoring product devices </description>
+    <url>https://github.com/jyehui6/sleep-parse-plugin</url>
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>

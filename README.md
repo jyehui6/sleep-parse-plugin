@@ -1,8 +1,8 @@
-# Sleep Analysis Plugin
+# Sleep-Parse-Plugin
 
 ## 项目简介
 
-Sleep Analysis Plugin 是一个专门用于解析能斯达智能睡眠监测产品设备睡眠数据的工具类库，提供了简洁的静态方法来解析不同格式的睡眠数据，方便客户直接调用。
+Sleep-Parse-Plugin 是一个专门用于解析能斯达智能睡眠监测产品设备睡眠数据的工具类库，提供了简洁的静态方法来解析不同格式的睡眠数据，方便客户直接调用。
 
 ## 功能特性
 

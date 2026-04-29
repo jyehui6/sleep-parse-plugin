@@ -22,7 +22,7 @@ Sleep-Parse-Plugin 是一个专门用于解析能斯达智能睡眠监测产品�
 <dependency>
     <groupId>io.github.jyehui6</groupId>
     <artifactId>sleepparse</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.1.RELEASE</version>
 </dependency>
 ```
 

@@ -6,7 +6,7 @@
 
     <groupId>io.github.jyehui6</groupId>
     <artifactId>sleepparse</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.1.RELEASE</version>
     <name>sleepparse</name>
     <description>The Sleep Analysis Plugin is a tool library specifically designed for parsing the sleep data of Leanstar intelligent sleep monitoring product devices </description>
     <url>https://github.com/jyehui6/sleep-parse-plugin</url>

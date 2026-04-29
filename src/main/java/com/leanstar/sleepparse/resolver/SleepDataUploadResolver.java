@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * 0x42数据类型的解析器
+ * 睡眠数据
  */
 public class SleepDataUploadResolver extends AbstractSleepResolver {
 

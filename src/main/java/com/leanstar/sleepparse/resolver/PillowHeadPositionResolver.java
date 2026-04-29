@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 0x66数据类型的解析器
- * 测试数据
+ * 0x63数据类型的解析器
+ * 设备上报头部位置
  */
-public class SemaphoreResolver implements JsonDataResolver {
+public class PillowHeadPositionResolver implements JsonDataResolver {
 
     @Override
     public ObjectNode resolve(String data) {
@@ -21,13 +21,11 @@ public class SemaphoreResolver implements JsonDataResolver {
         ObjectNode datas = objectMapper.createObjectNode();
         Map<String, Object> map = JsonUtil.json2map(data);
         map.remove("id");
-        datas.put("id", DataType.T_0x66.value());
+        datas.put("id", DataType.T_0x63.value());
         ObjectNode objectNode = objectMapper.createObjectNode();
-
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-
             if (value instanceof List) {
                 // 处理列表类型，保持为数组类型
                 ArrayNode arrayNode = objectMapper.createArrayNode();
@@ -66,4 +64,5 @@ public class SemaphoreResolver implements JsonDataResolver {
         datas.put("content",objectNode);
         return datas;
     }
+
 }

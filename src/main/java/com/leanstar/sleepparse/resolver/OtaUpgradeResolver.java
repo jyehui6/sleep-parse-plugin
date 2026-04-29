@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * 0x62数据类型的解析器
+ * 平台发送升级命令和固件包地址，设备响应结果
  */
 public class OtaUpgradeResolver implements JsonDataResolver{
     @Override

@@ -8,6 +8,7 @@ import com.leanstar.sleepparse.util.DataConverterUtil;
 
 /**
  * 0x43数据类型的解析器
+ * 睡眠报告
  */
 public class SleepReportDataResolver extends AbstractSleepResolver {
 

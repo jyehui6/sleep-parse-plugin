@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * 0x5E数据类型的解析器
+ * 上报 实时数据自动上传周期, 设备 IMEI CCID号,软件版本，时区设置
  */
 public class ReportCycleResolver implements JsonDataResolver {
 

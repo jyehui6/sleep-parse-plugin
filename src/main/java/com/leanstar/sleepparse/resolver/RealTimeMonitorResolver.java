@@ -8,6 +8,7 @@ import com.leanstar.sleepparse.util.DataConverterUtil;
 
 /**
  * 0x41数据类型的解析器
+ * 实时体征数据
  */
 public class RealTimeMonitorResolver extends AbstractSleepResolver {
 

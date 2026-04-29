@@ -77,10 +77,10 @@ public class SleepDataParserUtil {
             }
             result = objectNode;
         } catch (BusinessException e) {
-            logger.info("睡眠数据解析工具-业务异常：{}，{}，{}", e.getCode(), e.getMsg(), e.getDesc());
+            logger.error("睡眠数据解析工具-业务异常：{}，{}，{}", e.getCode(), e.getMsg(), e.getDesc());
             return null;
         } catch (Exception e) {
-            logger.info("睡眠数据解析工具-接收到的异常：{}", e.getMessage());
+            logger.error("睡眠数据解析工具-接收到的异常：{}", e.getMessage());
             return null;
         }
         return result;

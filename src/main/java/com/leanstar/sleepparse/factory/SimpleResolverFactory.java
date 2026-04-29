@@ -20,7 +20,7 @@ public class SimpleResolverFactory {
             return new OneByteNumberResolver();
         }else if (DataType.T_0x46.value().equals(dataTypeStr) || DataType.T_0x47.value().equals(dataTypeStr) || DataType.T_0x48.value().equals(dataTypeStr)
                   || DataType.T_0x49.value().equals(dataTypeStr) || DataType.T_0x4A.value().equals(dataTypeStr) || DataType.T_0x4B.value().equals(dataTypeStr)
-                  || DataType.T_0x4C.value().equals(dataTypeStr)|| DataType.T_0x5D.value().equals(dataTypeStr)||DataType.T_0x66.value().equals(dataTypeStr)){
+                  || DataType.T_0x4C.value().equals(dataTypeStr) || DataType.T_0x5D.value().equals(dataTypeStr)){
             return new StringTransformResolver();
         }
         return null;

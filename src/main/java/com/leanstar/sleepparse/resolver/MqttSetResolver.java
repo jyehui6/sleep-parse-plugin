@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * 0x5F数据类型的解析器
+ * 上报 网络平台设置相关
  */
 public class MqttSetResolver implements JsonDataResolver {
     @Override

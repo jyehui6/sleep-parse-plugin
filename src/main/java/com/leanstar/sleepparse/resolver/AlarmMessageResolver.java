@@ -8,21 +8,20 @@ import com.leanstar.sleepparse.util.JsonUtil;
 import java.util.Map;
 
 /**
- * 0x61数据类型的解析器
- * 设置灵敏度，阈值（随算法变更，部分设置可能仅是摆设）
+ * 0x67数据类型的解析器
+ * 设备上报报警信息
  */
-public class SensiResolver implements JsonDataResolver {
+public class AlarmMessageResolver implements JsonDataResolver {
+
     @Override
     public ObjectNode resolve(String data) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode datas = objectMapper.createObjectNode();
-        ObjectNode datass = objectMapper.createObjectNode();
         Map<String, Object> map = JsonUtil.json2map(data);
         map.remove("id");
-        ObjectNode objectNode = JsonUtil.getObjectNode((Map<String, Object>) map.get("sensiSetting"));
-        datass.put("sensiSetting",objectNode);
-        datas.put("id", DataType.T_0x61.value());
-        datas.put("content",datass);
+        ObjectNode objectNode = JsonUtil.getObjectNode(map);
+        datas.put("id", DataType.T_0x67.value());
+        datas.put("content",objectNode);
         return datas;
     }
 }

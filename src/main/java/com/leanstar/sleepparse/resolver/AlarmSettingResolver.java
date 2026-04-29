@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 0x66数据类型的解析器
- * 测试数据
+ * 0x68数据类型的解析器
+ * 设置设备报警
  */
-public class SemaphoreResolver implements JsonDataResolver {
+public class AlarmSettingResolver implements JsonDataResolver {
 
     @Override
     public ObjectNode resolve(String data) {
@@ -21,7 +21,7 @@ public class SemaphoreResolver implements JsonDataResolver {
         ObjectNode datas = objectMapper.createObjectNode();
         Map<String, Object> map = JsonUtil.json2map(data);
         map.remove("id");
-        datas.put("id", DataType.T_0x66.value());
+        datas.put("id", DataType.T_0x68.value());
         ObjectNode objectNode = objectMapper.createObjectNode();
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {

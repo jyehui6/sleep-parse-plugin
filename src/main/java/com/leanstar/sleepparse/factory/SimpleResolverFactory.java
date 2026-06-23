@@ -25,12 +25,12 @@ public class SimpleResolverFactory {
         } else if (DataType.T_0x43.value().equals(dataTypeStr)) {
             switch (ProductPayloadDetector.detectSleepReportVariant(payload)) {
                 case SMD:
-                    return new SleepReportDataResolver2();
+                    return SleepReportDataResolver.smd();
                 case PILLOW_LITE:
-                    return new SleepReportDataPillowLiteResolver();
+                    return SleepReportDataResolver.pillowLite();
                 case PILLOW_FULL:
                 default:
-                    return new SleepReportDataResolver();
+                    return SleepReportDataResolver.pillowFull();
             }
         } else if (DataType.T_0x44.value().equals(dataTypeStr) || DataType.T_0x45.value().equals(dataTypeStr) || DataType.T_0x5C.value().equals(dataTypeStr)) {
             return new OneByteNumberResolver();
@@ -44,15 +44,11 @@ public class SimpleResolverFactory {
 
     private static Resolver createSleepNodeResolver(MyBase64 payload, ProductType productType) {
         if (productType != null) {
-            return toSleepNodeResolver(ProductType.T_PILLOW.equals(productType) ? SleepNodeVariant.PILLOW : SleepNodeVariant.SMD);
+            return ProductType.T_PILLOW.equals(productType) ? SleepDataUploadResolver.pillow() : SleepDataUploadResolver.smd();
         }
-        return toSleepNodeResolver(ProductPayloadDetector.detectSleepNodeVariant(payload));
-    }
-
-    private static Resolver toSleepNodeResolver(SleepNodeVariant variant) {
-        return variant == SleepNodeVariant.PILLOW
-                ? new SleepDataUploadResolver()
-                : new SleepDataUploadResolver2();
+        return ProductPayloadDetector.detectSleepNodeVariant(payload) == SleepNodeVariant.PILLOW
+                ? SleepDataUploadResolver.pillow()
+                : SleepDataUploadResolver.smd();
     }
 
 }

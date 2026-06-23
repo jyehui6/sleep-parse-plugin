@@ -7,7 +7,9 @@ Sleep-Parse-Plugin 是一个专门用于解析能斯达智能睡眠监测产品�
 ## 功能特性
 
 - 支持解析特定协议的睡眠数据
-- 自动适配不同类型的睡眠数据格式
+- 0x42 / 0x43 自动识别睡眠枕与睡眠带格式
+- 0x42 可选传入 `ProductType` 强制指定产品类型
+- 自动适配 0x5E 及之后基于 JSON 的新数据格式
 
 ## 环境
 
@@ -38,7 +40,6 @@ Sleep-Parse-Plugin 是一个专门用于解析能斯达智能睡眠监测产品�
    ```bash
    mvn clean install
    ```
-   
 
 ## 项目结构
 
@@ -46,7 +47,7 @@ Sleep-Parse-Plugin 是一个专门用于解析能斯达智能睡眠监测产品�
 sleep-analysis-plugin/
 ├── src/
 │   ├── main/java/com/leanstar/sleepparse/
-│   │   ├── constant/         # 常量定义
+│   │   ├── constant/         # 常量定义（DataType、ProductType 等）
 │   │   ├── domain/           # 领域模型
 │   │   ├── exception/        # 异常类
 │   │   ├── factory/          # 解析器工厂
@@ -54,9 +55,9 @@ sleep-analysis-plugin/
 │   │   ├── resolver/         # 数据解析器
 │   │   └── util/             # 工具类
 │   └── test/                 # 测试代码
-├── .gitignore               # Git 忽略文件
-├── pom.xml                  # Maven 配置文件
-└── README.md                # 项目说明文档
+├── .gitignore                # Git 忽略文件
+├── pom.xml                   # Maven 配置文件
+└── README.md                 # 项目说明文档
 ```
 
 ## 核心工具类
@@ -65,12 +66,23 @@ sleep-analysis-plugin/
 
 提供静态方法 `parse` 用于解析睡眠数据：
 
-- `parse(String data)`: 解析 JSON 格式的字符串数据
-- `parse(byte[] bytes)`: 解析字节数组形式的数据
+| 方法 | 说明                                            |
+|------|-----------------------------------------------|
+| `parse(String data)` | 解析 JSON 格式字符串，0x42/0x43 自动识别枕/带               |
+| `parse(String data, ProductType productType)` | 建议使用，`productType`0x42 强制按指定产品解析 |
+
+`ProductType` 枚举：
+
+| 值 | 说明 |
+|----|------|
+| `T_PILLOW` | 睡眠枕 |
+| `T_SMD` | 睡眠带 |
+
+解析失败时返回 `null`，详细错误见日志。
 
 ## 使用示例
 
-### 解析0x41实时体征数据
+### 解析 0x41 实时体征数据
 
 ```java
 import com.leanstar.sleepparse.util.SleepDataParserUtil;
@@ -103,7 +115,7 @@ public class Example {
         String sleepData = "{\"0x42\":\"DEC8YAoAQQ0AAUJCDgABQw==\"}";
         
         // 解析数据
-        ObjectNode result = SleepDataParserUtil.parse(sleepData);
+        ObjectNode result = SleepDataParserUtil.parse(sleepData, ProductType.T_PILLOW);
         
         // 输出解析结果
         System.out.println("解析结果: " + result.toString());

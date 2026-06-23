@@ -7,13 +7,13 @@ import com.leanstar.sleepparse.iterator.Iterator;
 import com.leanstar.sleepparse.util.DataConverterUtil;
 
 /**
- * 0x43数据类型的解析器（睡眠枕产品系列）
- * 睡眠报告
+ * 0x43数据类型的解析器（无止鼾功能的睡眠枕，载荷 29 字节）
+ * 评分明细 10 字节 + 报告统计 19 字节（无止鼾次数）
  */
-public class SleepReportDataResolver extends AbstractSleepResolver {
+public class SleepReportDataPillowLiteResolver extends AbstractSleepResolver {
 
-    public SleepReportDataResolver(){
-        attributeInfos = new String[10 + 15][2];
+    public SleepReportDataPillowLiteResolver() {
+        attributeInfos = new String[10 + 14][2];
 
         attributeInfos[0][0] = "sleepScore";
         attributeInfos[0][1] = "1";
@@ -42,9 +42,6 @@ public class SleepReportDataResolver extends AbstractSleepResolver {
         attributeInfos[8][0] = "breathException";
         attributeInfos[8][1] = "1";
 
-        /**
-         * 新增打鼾扣分 一下依次递增
-         */
         attributeInfos[9][0] = "snore";
         attributeInfos[9][1] = "1";
 
@@ -89,29 +86,25 @@ public class SleepReportDataResolver extends AbstractSleepResolver {
 
         attributeInfos[23][0] = "snoreRatio";
         attributeInfos[23][1] = "1";
-
-        attributeInfos[24][0] = "antiSnoreTotal";
-        attributeInfos[24][1] = "1";
-
     }
 
     @Override
-    public ObjectNode resolve(MyBase64 target){
+    public ObjectNode resolve(MyBase64 target) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode data = objectMapper.createObjectNode();
         ObjectNode content = objectMapper.createObjectNode();
         ObjectNode objectNode1 = objectMapper.createObjectNode();
         ObjectNode objectNode2 = objectMapper.createObjectNode();
         Iterator iterator = target.iterator();
-        for(int i = 0; i < attributeInfos.length; i++){
+        for (int i = 0; i < attributeInfos.length; i++) {
             int currIndex = 0;
             String tempStr = "";
-            while(iterator.hasNext()){
+            while (iterator.hasNext()) {
                 tempStr = iterator.next() + tempStr;
-                if(++currIndex >= Integer.valueOf(attributeInfos[i][1])){
-                    if(isInObjectNode1(i)){
+                if (++currIndex >= Integer.valueOf(attributeInfos[i][1])) {
+                    if (isInObjectNode1(i)) {
                         objectNode1.put(attributeInfos[i][0], DataConverterUtil.binaryToInt(tempStr));
-                    }else{
+                    } else {
                         objectNode2.put(attributeInfos[i][0], DataConverterUtil.binaryToInt(tempStr));
                     }
                     break;
@@ -124,15 +117,14 @@ public class SleepReportDataResolver extends AbstractSleepResolver {
         data.put("id", target.getKey());
         data.putPOJO("content", content);
 
-
         return data;
     }
 
-    private boolean isInObjectNode1(int cursor){
+    private boolean isInObjectNode1(int cursor) {
         return cursor <= 9;
     }
 
-    private ObjectNode addAttributeValueToObjectNode2(ObjectNode objectNode2){
+    private ObjectNode addAttributeValueToObjectNode2(ObjectNode objectNode2) {
         objectNode2.put("dormantSleepRatio", objectNode2.get("sleepRatio").asInt() - objectNode2.get("middleSleepRatio").asInt() - objectNode2.get("deepSleepRatio").asInt());
         objectNode2.put("awakeRatio", 100 - objectNode2.get("sleepRatio").asInt());
         return objectNode2;

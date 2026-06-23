@@ -2,6 +2,7 @@ package com.leanstar.sleepparse.util;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.leanstar.sleepparse.constant.HexCodeEnum;
+import com.leanstar.sleepparse.constant.ProductType;
 import com.leanstar.sleepparse.domain.MyBase64;
 import com.leanstar.sleepparse.exception.BusinessException;
 import com.leanstar.sleepparse.factory.JsonDataSimpleResolverFactory;
@@ -29,8 +30,18 @@ public class SleepDataParserUtil {
      * @return 解析结果，ObjectNode类型
      */
     public static ObjectNode parse(String data) {
+        return parse(data, null);
+    }
+
+    /**
+     * 解析睡眠数据
+     * @param data 待解析的数据，JSON格式的字符串
+     * @param productType 可选产品类型，传入后 0x42 直接按指定格式解析
+     * @return 解析结果，ObjectNode类型
+     */
+    public static ObjectNode parse(String data, ProductType productType) {
         try {
-            return decode(data.getBytes("UTF-8"));
+            return decode(data.getBytes("UTF-8"), productType);
         } catch (UnsupportedEncodingException e) {
             logger.error("睡眠数据解析工具-编码异常：{}", e.getMessage());
             return null;
@@ -40,7 +51,7 @@ public class SleepDataParserUtil {
     /**
      * 解析睡眠数据
      */
-    private static ObjectNode decode(byte[] bytes) {
+    private static ObjectNode decode(byte[] bytes, ProductType productType) {
         ObjectNode result = null;
         ObjectNode objectNode = null;
         String key = null;
@@ -62,16 +73,16 @@ public class SleepDataParserUtil {
                     key = entry.getKey();
                     value = String.valueOf(entry.getValue());
                 }
-                Resolver resolver = SimpleResolverFactory.createResolver(key);
-                if (resolver == null) {
-                    logger.error("睡眠数据解析工具-未找到合适类型解析器-{}，{}", msg, key);
-                    return null;
-                }
-                MyBase64 myBase64 = null;
+                MyBase64 myBase64;
                 if (key.equals("0x5D")) {
                     myBase64 = new MyBase64(value, key);
                 } else {
                     myBase64 = new MyBase64(MyBase64Util.removeIllegalChar(value), key);
+                }
+                Resolver resolver = SimpleResolverFactory.createResolver(key, myBase64, productType);
+                if (resolver == null) {
+                    logger.error("睡眠数据解析工具-未找到合适类型解析器-{}，{}", msg, key);
+                    return null;
                 }
                 objectNode = resolver.resolve(myBase64);
             }

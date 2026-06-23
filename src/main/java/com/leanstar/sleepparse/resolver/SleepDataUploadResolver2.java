@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 0x42数据类型的解析器（睡眠枕产品系列）
+ * 0x42数据类型的解析器（睡眠带产品系列）
  * 睡眠数据
  */
-public class SleepDataUploadResolver extends AbstractSleepResolver {
+public class SleepDataUploadResolver2 extends AbstractSleepResolver {
 
-    public SleepDataUploadResolver(){
+    public SleepDataUploadResolver2(){
         // 创建一个二维数组,用来存储属性信息
-        attributeInfos = new String[5][2];
+        attributeInfos = new String[4][2];
 
         attributeInfos[0][0] = "heartRate";
         attributeInfos[0][1] = "1";
@@ -30,11 +30,6 @@ public class SleepDataUploadResolver extends AbstractSleepResolver {
 
         attributeInfos[3][0] = "bodyMoveTotal|sleepState";
         attributeInfos[3][1] = "5|3";
-
-        attributeInfos[4][0] = "antiSnoreTotal|snoreTotal";
-        attributeInfos[4][1] = "2|6";
-
-
     }
 
     @Override

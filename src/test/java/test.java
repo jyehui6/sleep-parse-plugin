@@ -1,3 +1,4 @@
+import com.leanstar.sleepparse.constant.ProductType;
 import com.leanstar.sleepparse.util.SleepDataParserUtil;
 
 /**
@@ -9,7 +10,9 @@ public class test {
             // 数据类型示例
             String new41 = "{\"0x41\":\"QBEB\"}";
             String new42 = "{\"0x42\": \"DEC8YAoAQQ0AAUJCDgABQw==\"}";
+            String smd_new42 = "{\"0x42\":\"ZOg5amgARg8ABEYPAARGDwAERg8ABEYPAARGDwAERg8ABEYPAARGDwAERg8ABEYPAARGDwAERg8ABEYPAARFDwAERQ8ABEYPAARGDwAERg8ABEUPAARFDwAERg8ABEYPAARGDwAERg8ABEYPAAQ=\"}";
             String new43 = "{\"0x43\":\"QwoCCgYAAAAFAGSeHmaSAZIBNw7+Xj4FDQAFAQMN\"}";
+            String smd_new43 = "{\"0x43\":\"RwAECgwBAAACUOUyalsBTgE8DU9hIwMLAAIB\"}";
             String new99 = "{\n" +
                     "\"id\":99,\n" +
                     "\"position\":[1,0,0,1,0,0]\n" +
@@ -59,8 +62,6 @@ public class test {
                     "}";
             // 调用解析方法
             System.out.println("0x41类型解析结果: " + SleepDataParserUtil.parse(new41).toString());
-            System.out.println("0x42类型解析结果: " + SleepDataParserUtil.parse(new42).toString());
-            System.out.println("0x43类型解析结果: " + SleepDataParserUtil.parse(new43).toString());
             System.out.println("99类型解析结果: " + SleepDataParserUtil.parse(new99).toString());
             System.out.println("100类型解析结果: " + SleepDataParserUtil.parse(new100).toString());
             System.out.println("101类型解析结果: " + SleepDataParserUtil.parse(new101).toString());
@@ -68,6 +69,13 @@ public class test {
             System.out.println("103类型解析结果: " + SleepDataParserUtil.parse(new103).toString());
             System.out.println("104类型解析结果: " + SleepDataParserUtil.parse(new104).toString());
             System.out.println("105类型解析结果: " + SleepDataParserUtil.parse(new105).toString());
+
+            System.out.println("睡眠枕0x42类型解析结果: " + SleepDataParserUtil.parse(new42).toString());
+            System.out.println("睡眠带0x42类型解析结果(自动识别): " + SleepDataParserUtil.parse(smd_new42).toString());
+            System.out.println("睡眠带0x42类型解析结果(显式兜底): " + SleepDataParserUtil.parse(smd_new42, ProductType.T_SMD).toString());
+
+            System.out.println("睡眠枕0x43类型解析结果: " + SleepDataParserUtil.parse(new43).toString());
+            System.out.println("睡眠带0x43类型解析结果: " + SleepDataParserUtil.parse(smd_new43).toString());
         }catch (Exception e){
             e.printStackTrace();
         }

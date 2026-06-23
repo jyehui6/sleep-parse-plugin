@@ -7,13 +7,13 @@ import com.leanstar.sleepparse.iterator.Iterator;
 import com.leanstar.sleepparse.util.DataConverterUtil;
 
 /**
- * 0x43数据类型的解析器（睡眠枕产品系列）
+ * 0x43数据类型的解析器（睡眠带产品系列）
  * 睡眠报告
  */
-public class SleepReportDataResolver extends AbstractSleepResolver {
+public class SleepReportDataResolver2 extends AbstractSleepResolver {
 
-    public SleepReportDataResolver(){
-        attributeInfos = new String[10 + 15][2];
+    public SleepReportDataResolver2(){
+        attributeInfos = new String[9 + 13][2];
 
         attributeInfos[0][0] = "sleepScore";
         attributeInfos[0][1] = "1";
@@ -42,57 +42,44 @@ public class SleepReportDataResolver extends AbstractSleepResolver {
         attributeInfos[8][0] = "breathException";
         attributeInfos[8][1] = "1";
 
-        /**
-         * 新增打鼾扣分 一下依次递增
-         */
-        attributeInfos[9][0] = "snore";
-        attributeInfos[9][1] = "1";
+        attributeInfos[9][0] = "beginStamp";
+        attributeInfos[9][1] = "4";
 
-        attributeInfos[10][0] = "beginStamp";
-        attributeInfos[10][1] = "4";
+        attributeInfos[10][0] = "reportDuration";
+        attributeInfos[10][1] = "2";
 
-        attributeInfos[11][0] = "reportDuration";
+        attributeInfos[11][0] = "inBedDuration";
         attributeInfos[11][1] = "2";
 
-        attributeInfos[12][0] = "inBedDuration";
-        attributeInfos[12][1] = "2";
+        attributeInfos[12][0] = "heartRateAverage";
+        attributeInfos[12][1] = "1";
 
-        attributeInfos[13][0] = "heartRateAverage";
+        attributeInfos[13][0] = "respiratoryRateAverage";
         attributeInfos[13][1] = "1";
 
-        attributeInfos[14][0] = "respiratoryRateAverage";
+        attributeInfos[14][0] = "bodyMoveTotal";
         attributeInfos[14][1] = "1";
 
-        attributeInfos[15][0] = "bodyMoveTotal";
+        attributeInfos[15][0] = "sleepRatio";
         attributeInfos[15][1] = "1";
 
-        attributeInfos[16][0] = "sleepRatio";
+        attributeInfos[16][0] = "middleSleepRatio";
         attributeInfos[16][1] = "1";
 
-        attributeInfos[17][0] = "middleSleepRatio";
+        attributeInfos[17][0] = "deepSleepRatio";
         attributeInfos[17][1] = "1";
 
-        attributeInfos[18][0] = "deepSleepRatio";
+        attributeInfos[18][0] = "awakeTimes";
         attributeInfos[18][1] = "1";
 
-        attributeInfos[19][0] = "awakeTimes";
+        attributeInfos[19][0] = "breathStop";
         attributeInfos[19][1] = "1";
 
-        attributeInfos[20][0] = "breathStop";
+        attributeInfos[20][0] = "breathException";
         attributeInfos[20][1] = "1";
 
-        attributeInfos[21][0] = "breathException";
+        attributeInfos[21][0] = "nightSleepFlag";
         attributeInfos[21][1] = "1";
-
-        attributeInfos[22][0] = "nightSleepFlag";
-        attributeInfos[22][1] = "1";
-
-        attributeInfos[23][0] = "snoreRatio";
-        attributeInfos[23][1] = "1";
-
-        attributeInfos[24][0] = "antiSnoreTotal";
-        attributeInfos[24][1] = "1";
-
     }
 
     @Override
@@ -129,7 +116,7 @@ public class SleepReportDataResolver extends AbstractSleepResolver {
     }
 
     private boolean isInObjectNode1(int cursor){
-        return cursor <= 9;
+        return cursor <= 8;
     }
 
     private ObjectNode addAttributeValueToObjectNode2(ObjectNode objectNode2){

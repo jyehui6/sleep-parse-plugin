@@ -9,6 +9,11 @@ public class MyBase64Util {
 
     /**
      * 编码
+     *
+     * @param s 原始字符串
+     * @param charset 字符集
+     * @return Base64 编码结果
+     * @throws UnsupportedEncodingException 字符集不支持时抛出
      */
     public static String encode(String s, String charset) throws UnsupportedEncodingException {
         byte[] arr = s.getBytes(charset);
@@ -55,6 +60,11 @@ public class MyBase64Util {
     // 如果是解析所有，则：startIndex = 0；endIndex = s.length
     /**
      * 解码
+     *
+     * @param s Base64 字符串
+     * @param startIndex 起始下标（含）
+     * @param endIndex 结束下标（不含）
+     * @return 解码后的二进制比特串
      */
     public static String decode(String s, int startIndex, int endIndex) {
         StringBuilder sb = new StringBuilder();
@@ -88,6 +98,9 @@ public class MyBase64Util {
 
     /**
      * ASCII编码数字转字符
+     *
+     * @param w Base64 索引值（0-63）
+     * @return 对应字符
      */
     public static char convert(int w){
         if(w >= 0 && w <= 25){
@@ -189,8 +202,9 @@ public class MyBase64Util {
 
     /**
      * 剔除字符串中的非法字符（不是BASE64编码中涉及的字符都是非法字符）
-     * @param sourceStr
-     * @return
+     *
+     * @param sourceStr 原始字符串
+     * @return 剔除非法字符后的字符串
      */
     public static String removeIllegalChar(String sourceStr){
         int[]  illegalCharArray = null;

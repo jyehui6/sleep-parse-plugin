@@ -34,6 +34,9 @@ public final class ProductPayloadDetector {
 
     /**
      * 自动识别 0x42 节点数据格式；歧义时默认睡眠枕。
+     *
+     * @param target Base64 载荷
+     * @return 节点数据格式变体
      */
     public static SleepNodeVariant detectSleepNodeVariant(MyBase64 target) {
         int totalBytes = countBytes(target);
@@ -59,6 +62,12 @@ public final class ProductPayloadDetector {
         return SleepNodeVariant.PILLOW;
     }
 
+    /**
+     * 自动识别 0x43 睡眠报告格式。
+     *
+     * @param target Base64 载荷
+     * @return 报告格式变体
+     */
     public static SleepReportVariant detectSleepReportVariant(MyBase64 target) {
         int totalBytes = countBytes(target);
         if (totalBytes == SLEEP_REPORT_SMD_BYTES) {

@@ -33,7 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jackson.version>2.21.2</jackson.version>
+        <jackson.version>2.21.5</jackson.version>
         <slf4j.version>1.7.36</slf4j.version>
         <junit.version>4.13.2</junit.version>
     </properties>
@@ -95,8 +95,7 @@
                     <charset>UTF-8</charset>
                     <encoding>UTF-8</encoding>
                     <docencoding>UTF-8</docencoding>
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                    <failOnError>false</failOnError> <!-- 忽略错误 -->
+                    <failOnError>true</failOnError>
                 </configuration>
                 <executions>
                     <execution>

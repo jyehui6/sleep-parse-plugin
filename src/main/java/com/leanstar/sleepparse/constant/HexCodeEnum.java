@@ -1,8 +1,7 @@
 package com.leanstar.sleepparse.constant;
 
 /**
- * @author feng
- * @date 2020/7/22 9:26
+ * 十六进制数据类型编码枚举。
  */
 public enum HexCodeEnum {
     T_0x5E(94, "0x5E"),
